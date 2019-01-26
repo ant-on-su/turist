@@ -21,8 +21,19 @@ df.dropna(axis='rows', how="all", inplace=True)
 df.shape
 
 #%%
-df['M3']=df['M3'].map({'ukraina' : 1, 'polska' :0})
-df.head()
+import phik
+from phik import resources, report
 
 #%%
-df.dtypes
+df.corr()
+
+#%%
+cor=df.phik_matrix(interval_cols=None)
+cor.to_csv('./output/cor.csv')
+
+#%%
+sig=df.significance_matix(interval_cols=None)
+sig.to_csv('./output/sig.csv')
+
+#%%
+report.correlation_report(df, pdf_file_name='./output/test.pdf', do_outliers=False)
